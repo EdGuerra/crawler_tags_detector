@@ -1,0 +1,22 @@
+ <launch>
+ 
+  <arg name="marker_size" default="4" />
+  <arg name="max_new_marker_error" default="0.08" />
+  <arg name="max_track_error" default="0.2" />
+  <arg name="output_frame" default="camera" />
+
+  <arg name="bundle_files" default="/home/egp/catkin_ws/src/crawler_tags_detector/launch/crawler-marker-bundle.xml" />
+
+  <arg name="cam_image_topic" default="/camera/image_raw" />
+  <arg name="cam_info_topic" default="/camera/camera_info" />
+
+
+<node name="ar_track_alvar" pkg="ar_track_alvar" type="findMarkerBundlesNoKinect" respawn="false" output="screen" args="$(arg marker_size) $(arg max_new_marker_error) $(arg max_track_error) $(arg cam_image_topic) $(arg cam_info_topic) $(arg output_frame) $(arg bundle_files)" />
+ 
+<node name="crawler_tags_detector" pkg="crawler_tags_detector" type="crawler_tags_detector_node" output="screen" >
+    <remap from="/alvar_input" to="/ar_pose_marker" />
+    <remap from="/pose_output" to="/crawler/pose_from_tags" />
+
+</node>
+
+</launch>
