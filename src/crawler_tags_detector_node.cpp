@@ -10,7 +10,7 @@ CCrawlerTagsDetector::CCrawlerTagsDetector(ros::NodeHandle &nh)
 
     // Publish the Stamped Pose
     this->pose_pub_ = nh.advertise<geometry_msgs::PoseStamped>("/pose_output", 100);
-//    nh.param<std::string>("camera_frame_id", camera_frame_id_, "cam");
+    nh.param<std::string>("output_frame", camera_frame_id_, "cam");
 
 }
 
@@ -38,8 +38,10 @@ void CCrawlerTagsDetector::markerCallback (const ar_track_alvar_msgs::AlvarMarke
 		    pose_msg.pose.orientation.z = arPoseMarker_.pose.pose.orientation.z*scale_bias_;
 		    pose_msg.pose.orientation.w = arPoseMarker_.pose.pose.orientation.w*scale_bias_;
 
-
-		    pose_pub_.publish(pose_msg);
+		    if(pose_msg.pose.position.z > 0.0)
+		    {
+		    	pose_pub_.publish(pose_msg);
+	    	}
 	    	
 	    }
 

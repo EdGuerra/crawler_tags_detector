@@ -5,7 +5,7 @@
   <arg name="max_track_error" default="0.2" />
   <arg name="output_frame" default="camera" />
 
-  <arg name="bundle_files" default="/home/egp/catkin_ws/src/crawler_tags_detector/launch/crawler-marker-bundle.xml" />
+  <arg name="bundle_files" default="/home/egp/catkin_ws/src/crawler_tags_detector/launch/crawler_marker_bundle.xml" />
 
   <arg name="cam_image_topic" default="/camera/image_raw" />
   <arg name="cam_info_topic" default="/camera/camera_info" />
